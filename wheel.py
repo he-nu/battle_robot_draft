@@ -22,11 +22,11 @@ class Wheel:
             speed = -speed
             
         if speed > 0:
-            self.rpwm.duty_u16(int(speed * 512 / 100))
+            self.rpwm.duty_u16(int(abs(speed) * 65535 / 100))
             self.lpwm.duty_u16(0)
         elif speed < 0:
             self.rpwm.duty_u16(0)
-            self.lpwm.duty_u16(int(-speed * 512 / 100))
+            self.lpwm.duty_u16(int(abs(speed) * 65535 / 100))
         else:
             self.rpwm.duty_u16(0)
             self.lpwm.duty_u16(0)
